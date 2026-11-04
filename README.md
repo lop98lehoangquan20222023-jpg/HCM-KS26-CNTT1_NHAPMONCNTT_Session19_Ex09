@@ -1,30 +1,33 @@
-# PHẦN 1: BÁO CÁO PHÂN TÍCH KIẾN TRÚC AN NINH
-1. Rủi ro khi lưu mật khẩu trên Chrome (Login Data):
+# Phần 1:   
+1. Tình huống 1:là kết hợp tấn công Phishing và Typosquatting.Chi tiết giả mạo: URL viết sai thành githuh-security.com (sai chữ "hub" thành "huh").
+2. Tình huống 2: Là cạm bẫy Mã độc qua phần mềm Crack. Việc yêu cầu tắt Windows Defender nhằm vô hiệu hóa tường lửa/antivirus để mã độc đánh cắp thông tin
+3. Áp dụng Quy tắc 5 KHÔNG:
 
-- Mật khẩu bị lưu ở dạng mã hóa yếu.
+- Tình huống 1: KHÔNG bấm vào liên kết lạ / KHÔNG cung cấp mật khẩu.
 
-- Khi dính mã độc Infostealer, hacker dễ dàng lấy file dữ liệu này và giải mã ngay lập tức trên máy của bạn mà không cần biết mật khẩu tổng, đồng thời đánh cắp luôn phiên đăng nhập để vượt qua 2FA.
+- Tình huống 2: KHÔNG tải phần mềm bẻ khóa (crack) / KHÔNG tắt phần mềm bảo vệ.
+4. 4 Bước Cấp cứu:
 
-2. Kiến trúc Zero-Knowledge & Client-side Decryption:
+   Ngắt kết nối mạng ngay lập tức.
 
-- Dữ liệu được mã hóa hoàn toàn bằng AES-256 ngay trên thiết bị của bạn (Client) trước khi gửi lên đám mây.
+   Thu hồi quyền truy cập / đăng xuất toàn bộ phiên làm việc.
 
-- Nếu máy chủ Bitwarden bị hack? Hacker không thể giải mã dữ liệu vì máy chủ hoàn toàn không giữ khóa hay mật khẩu tổng (Zero-Knowledge).
+   Đổi mật khẩu và bật 2FA từ thiết bị sạch.
 
-# PHẦN 2: THIẾT KẾ CHÍNH SÁCH & KỊCH BẢN CHUYỂN ĐỔI
-3. Tạo Master Passphrase đạt chuẩn:
+   Quét sạch mã độc hoặc cài lại hệ điều hành.
+# PHẦN 2 – Chuyển sang Password Manager
+- Hậu quả khi lộ mật khẩu chung: Hacker dùng mật khẩu đó xâm nhập 2 tài khoản còn lại.
+- Zero-Knowledge: Dữ liệu két sắt được mã hóa bằng AES-256 ngay trên thiết bị.Máy chủ Bitwarden hoàn toàn không giữ khóa hay mật khẩu tổng, nên nếu bị hack, chúng cũng không thể giải mã dữ liệu.
 
-Nguyên tắc: Dài tối thiểu 20 ký tự, kết hợp từ ngẫu nhiên, số và ký tự đặc biệt để chống tấn công vét cạn.
+Thông số Generator:
 
-Ví dụ: Tieu-Hổ-Bay-Giữa-Mây-99!$2026
+Độ dài: 24 đến 32 ký tự
 
-4. Cấu hình Generator trong Bitwarden cho 40 tài khoản:
+Chữ hoa (A-Z), Chữ thường (a-z), Chữ số (0-9), Ký tự đặc biệt: Bật hết.
 
-Loại: Password | Độ dài: 24 - 32 ký tự
+# PHẦN 3 – Kích hoạt 2FA cho tài khoản GitHub tổ chức:
+1. Lý do dùng Authenticator App (TOTP) thay SMS OTP:Tránh bị tấn công chiếm số điện thoại
+2. Các bước kích hoạt trên GitHub:
 
-Tích chọn đầy đủ: Chữ hoa (A-Z), Chữ thường (a-z), Số (0-9), và Ký tự đặc biệt (!@#$).
-
-5. Auto-fill chống Phishing tốt hơn con người:
-
-Bitwarden chỉ tự động điền khi tên miền khớp chính xác 100% với dữ liệu đã lưu. Các trang web lừa đảo giả mạo tên miền (ví dụ: githúb.com) sẽ bị từ chối điền, giúp cảnh báo người dùng ngay lập tức.
-
+- Vào Settings -> Password and authentication -> Enable two-factor authentication -> Chọn Authenticator app -> Quét mã QR bằng Google Authenticator -> Nhập mã 6 số để xác nhận.
+- Mã khôi phục (Recovery Codes): Nên lưu in ra giấy cất vào két sắt / lưu trong két mật khẩu cá nhân
